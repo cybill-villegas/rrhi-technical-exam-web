@@ -74,7 +74,7 @@ const Create = () => {
   };
 
   const handleBackToLists = () => {
-    navigate('/list');
+    navigate('/');
   };
 
   const handleSnackbarClose = () => {
