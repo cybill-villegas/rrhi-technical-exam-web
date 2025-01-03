@@ -1,25 +1,50 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ThemeProvider, CssBaseline, Container } from '@mui/material';
+import { createTheme } from '@mui/material/styles';
+import List from './pages/List.tsx';
+import Create from './pages/Create.tsx';
+import Update from './pages/Update.tsx';
+import View from './pages/View.tsx';
+import TopNav from './components/TopNav.tsx';
+
+const theme = createTheme({
+  typography: {
+    fontFamily: 'Poppins, sans-serif',
+    h4: {
+      fontFamily: 'Poppins, sans-serif',
+    },
+    button: {
+      fontFamily: 'Poppins, sans-serif',
+    },
+  },
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          fontFamily: 'Poppins, sans-serif',
+        },
+      },
+    },
+  },
+});
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Router>
+        <TopNav />
+        <Container>
+          <Routes>
+            <Route path="/" element={<List />} />
+            <Route path="/create" element={<Create />} />
+            <Route path="/update/:id" element={<Update />} />
+            <Route path="/view/:id" element={<View />} />
+          </Routes>
+        </Container>
+      </Router>
+    </ThemeProvider>
   );
 }
 
